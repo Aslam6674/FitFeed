@@ -1,0 +1,14 @@
+/* FityFeed global styles */
+.flex-box-row {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#heading {
+    font-family: 'Syne', monospace;
+    font-weight: 700;
+    font-size: xx-large;
+    text-align: left;
+    color: #00E5A0;
+}
