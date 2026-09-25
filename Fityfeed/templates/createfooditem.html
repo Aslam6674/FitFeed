@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FityFeed — Create Food</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#00E5A0;--green-dark:#007A52;--bg:#0A0F0D;--card:#131F16;--text:#F0FFF6;--text2:#8BA898;--border:rgba(0,229,160,0.12);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px;width:100%;max-width:500px;}
+  h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:24px;}
+  label{display:block;font-size:11px;color:var(--text2);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px;}
+  input,select{width:100%;background:#0A0F0D;border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--text);font-size:14px;outline:none;margin-bottom:16px;font-family:'DM Sans',sans-serif;}
+  input:focus,select:focus{border-color:var(--green);}
+  select option{background:#111;}
+  .btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--green),var(--green-dark));border:none;border-radius:12px;color:#0A0F0D;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;}
+  .back{display:inline-block;color:var(--green);text-decoration:none;font-size:13px;margin-bottom:20px;}
+  .errorlist{list-style:none;color:#FF6B6B;font-size:12px;margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <a class="back" href="/">← Back</a>
+  <h2>Create Food Item</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <label>{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    {% endfor %}
+    <button class="btn" type="submit">Save Food Item</button>
+  </form>
+</div>
+</body>
+</html>

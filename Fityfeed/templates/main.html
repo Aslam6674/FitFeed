@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FityFeed Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--green:#00E5A0;--green-dark:#007A52;--bg:#0A0F0D;--card:#131F16;--text:#F0FFF6;--text2:#8BA898;--border:rgba(0,229,160,0.12);--amber:#FFB830;--coral:#FF6B6B;--blue:#4ECDC4;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+  nav{background:rgba(10,15,13,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+  .logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--green);text-decoration:none;}
+  .nav-links{display:flex;gap:8px;}
+  a.nl{color:var(--text2);text-decoration:none;font-size:13px;padding:8px 16px;border-radius:20px;transition:all .2s;}
+  a.nl:hover{color:var(--green);background:rgba(0,229,160,.08);}
+  a.out{border:1px solid var(--border);}
+  .container{max-width:1100px;margin:0 auto;padding:32px 24px;}
+  h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:28px;}
+  h1 span{color:var(--green);}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;}
+  .stat-n{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
+  .stat-v{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--green);}
+  h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:16px;color:var(--green);}
+  .food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px;}
+  .food-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .food-card-name{font-weight:500;font-size:14px;margin-bottom:4px;}
+  .food-card-cal{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--green);}
+  .food-card-meta{font-size:11px;color:var(--text2);margin-top:4px;}
+  .customers{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;}
+  table{width:100%;border-collapse:collapse;}
+  th{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;padding:8px 0;border-bottom:1px solid var(--border);text-align:left;}
+  td{padding:12px 0;border-bottom:1px solid rgba(0,229,160,.05);font-size:14px;}
+  tr:last-child td{border-bottom:none;}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🥗 FityFeed Admin</a>
+  <div class="nav-links">
+    <a class="nl" href="/">Dashboard</a>
+    <a class="nl" href="/product/">Foods</a>
+    <a class="nl" href="/createfooditem/">Add Food</a>
+    <a class="nl out" href="/logout/">Logout</a>
+  </div>
+</nav>
+<div class="container">
+  <h1>Admin <span>Dashboard</span></h1>
+  <div class="grid">
+    <div class="stat"><div class="stat-n">Customers</div><div class="stat-v">{{ customers.count }}</div></div>
+    <div class="stat"><div class="stat-n">Breakfast Items</div><div class="stat-v" style="color:#4ECDC4;">{{ breakfast|length }}</div></div>
+    <div class="stat"><div class="stat-n">Lunch Items</div><div class="stat-v" style="color:#FFB830;">{{ lunch|length }}</div></div>
+    <div class="stat"><div class="stat-n">Dinner Items</div><div class="stat-v" style="color:#FF6B6B;">{{ dinner|length }}</div></div>
+  </div>
+  <h2>🌅 Breakfast</h2>
+  <div class="food-grid">{% for f in breakfast %}<div class="food-card"><div class="food-card-name">{{ f.name }}</div><div class="food-card-cal">{{ f.calorie }} kcal</div><div class="food-card-meta">C:{{ f.carbohydrate }}g P:{{ f.protein }}g F:{{ f.fats }}g</div></div>{% empty %}<p style="color:var(--text2)">No items yet</p>{% endfor %}</div>
+  <h2>☀️ Lunch</h2>
+  <div class="food-grid">{% for f in lunch %}<div class="food-card"><div class="food-card-name">{{ f.name }}</div><div class="food-card-cal">{{ f.calorie }} kcal</div><div class="food-card-meta">C:{{ f.carbohydrate }}g P:{{ f.protein }}g F:{{ f.fats }}g</div></div>{% empty %}<p style="color:var(--text2)">No items yet</p>{% endfor %}</div>
+  <h2>🌙 Dinner</h2>
+  <div class="food-grid">{% for f in dinner %}<div class="food-card"><div class="food-card-name">{{ f.name }}</div><div class="food-card-cal">{{ f.calorie }} kcal</div><div class="food-card-meta">C:{{ f.carbohydrate }}g P:{{ f.protein }}g F:{{ f.fats }}g</div></div>{% empty %}<p style="color:var(--text2)">No items yet</p>{% endfor %}</div>
+  <h2>🍎 Snacks</h2>
+  <div class="food-grid">{% for f in snacks %}<div class="food-card"><div class="food-card-name">{{ f.name }}</div><div class="food-card-cal">{{ f.calorie }} kcal</div><div class="food-card-meta">C:{{ f.carbohydrate }}g P:{{ f.protein }}g F:{{ f.fats }}g</div></div>{% empty %}<p style="color:var(--text2)">No items yet</p>{% endfor %}</div>
+  <h2 style="margin-top:8px;">👥 Customers</h2>
+  <div class="customers">
+    <table><thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead>
+    <tbody>{% for c in customers %}<tr><td>{{ c.name }}</td><td>{{ c.email }}</td><td>{{ c.date_created|date:"M d, Y" }}</td></tr>{% empty %}<tr><td colspan="3" style="color:var(--text2)">No customers yet</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FityFeed — Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --green:#00E5A0; --green-dark:#007A52; --bg:#0A0F0D; --card:#131F16; --text:#F0FFF6; --text2:#8BA898; --border:rgba(0,229,160,0.12); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; }
+  .orb1 { position:fixed; width:400px; height:400px; background:radial-gradient(circle,rgba(0,229,160,0.15),transparent 70%); top:-100px; right:-100px; border-radius:50%; pointer-events:none; }
+  .orb2 { position:fixed; width:300px; height:300px; background:radial-gradient(circle,rgba(0,120,80,0.1),transparent 70%); bottom:0; left:-80px; border-radius:50%; pointer-events:none; }
+  .box { background:var(--card); border:1px solid var(--border); border-radius:24px; padding:40px; width:100%; max-width:400px; position:relative; z-index:1; }
+  .logo { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--green); text-align:center; margin-bottom:6px; }
+  .subtitle { text-align:center; color:var(--text2); font-size:14px; margin-bottom:32px; }
+  label { display:block; font-size:11px; color:var(--text2); letter-spacing:.07em; text-transform:uppercase; font-weight:500; margin-bottom:7px; }
+  input { width:100%; background:#0A0F0D; border:1px solid var(--border); border-radius:10px; padding:13px 16px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color .2s; margin-bottom:18px; }
+  input:focus { border-color:var(--green); }
+  .btn { width:100%; padding:15px; background:linear-gradient(135deg,var(--green),var(--green-dark)); border:none; border-radius:12px; color:#0A0F0D; font-family:'Syne',sans-serif; font-size:15px; font-weight:700; cursor:pointer; margin-top:6px; }
+  .btn:hover { opacity:.9; }
+  .link-row { text-align:center; margin-top:20px; font-size:13px; color:var(--text2); }
+  .link-row a { color:var(--green); text-decoration:none; font-weight:500; }
+  .alert { padding:10px 14px; background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.3); border-radius:8px; color:#FF6B6B; font-size:13px; margin-bottom:16px; }
+</style>
+</head>
+<body>
+<div class="orb1"></div>
+<div class="orb2"></div>
+<div class="box">
+  <div class="logo">🥗 FityFeed</div>
+  <div class="subtitle">Sign in to track your calories</div>
+  {% if messages %}
+    {% for message in messages %}<div class="alert">{{ message }}</div>{% endfor %}
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Enter your username" required>
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter your password" required>
+    <button class="btn" type="submit">Sign In</button>
+  </form>
+  <div class="link-row">Don't have an account? <a href="/register/">Register here</a></div>
+  <div class="link-row" style="margin-top:10px;"><a href="/reset_password/">Forgot password?</a></div>
+</div>
+</body>
+</html>

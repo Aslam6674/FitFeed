@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FityFeed — Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --green:#00E5A0; --green-dark:#007A52; --bg:#0A0F0D; --card:#131F16; --text:#F0FFF6; --text2:#8BA898; --border:rgba(0,229,160,0.12); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .orb1 { position:fixed; width:400px; height:400px; background:radial-gradient(circle,rgba(0,229,160,0.15),transparent 70%); top:-100px; right:-100px; border-radius:50%; pointer-events:none; }
+  .box { background:var(--card); border:1px solid var(--border); border-radius:24px; padding:40px; width:100%; max-width:440px; position:relative; z-index:1; }
+  .logo { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--green); text-align:center; margin-bottom:6px; }
+  .subtitle { text-align:center; color:var(--text2); font-size:14px; margin-bottom:28px; }
+  label { display:block; font-size:11px; color:var(--text2); letter-spacing:.07em; text-transform:uppercase; font-weight:500; margin-bottom:6px; }
+  input { width:100%; background:#0A0F0D; border:1px solid var(--border); border-radius:10px; padding:13px 16px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color .2s; margin-bottom:16px; }
+  input:focus { border-color:var(--green); }
+  .errorlist { list-style:none; color:#FF6B6B; font-size:12px; margin-bottom:10px; }
+  .btn { width:100%; padding:15px; background:linear-gradient(135deg,var(--green),var(--green-dark)); border:none; border-radius:12px; color:#0A0F0D; font-family:'Syne',sans-serif; font-size:15px; font-weight:700; cursor:pointer; }
+  .link-row { text-align:center; margin-top:18px; font-size:13px; color:var(--text2); }
+  .link-row a { color:var(--green); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="orb1"></div>
+<div class="box">
+  <div class="logo">🥗 FityFeed</div>
+  <div class="subtitle">Create your account</div>
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <label>{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    {% endfor %}
+    <button class="btn" type="submit">Create Account</button>
+  </form>
+  <div class="link-row">Already have an account? <a href="/login/">Login</a></div>
+</div>
+</body>
+</html>
